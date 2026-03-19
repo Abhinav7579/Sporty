@@ -32,6 +32,9 @@ export function securityMiddleware(){
         if(!arcjetKey){
             return next();
         }
+        if(req.ip === "127.0.0.1" || req.ip === "::1"){
+      return next();
+    }
         try{
             const decision=await httpArcjet.protect(req);
             if(decision.isDenied()){
