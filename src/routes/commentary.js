@@ -67,6 +67,10 @@ commentaryRouter.post('/', async (req, res) => {
       tags: JSON.stringify(parsedBody.data.tags), // Store tags as JSON string since schema uses text
     }).returning();
 
+    if(req.app.locals.broadcastCommentary){
+        req.app.locals.broadcastCommentary(event.matchId, event);
+    }
+
     res.status(201).json({ message: "Commentary created", data: event });
   } catch (error) {
     res.status(500).json({ error: 'Internal server error', message: error.message });
