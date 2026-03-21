@@ -1,9 +1,13 @@
+import dotenv from 'dotenv';
+dotenv.config();
 import arcjet, { detectBot, shield, slidingWindow } from "@arcjet/node";
 const arcjetKey=process.env.ARCJET_KEY;
 const arcjetMode=process.env.ARCJET_MODE==='DRY_RUN'?'DRY_RUN':'LIVE';
 
 if(!arcjetKey)
-{  throw new Error("ARCJET_KEY environment variable is required");
+{  
+    
+    throw new Error("ARCJET_KEY environment variable is required");
 }
 
 export const httpArcjet=arcjetKey?
